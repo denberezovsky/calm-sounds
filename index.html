@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4A90A4">
+    <meta name="description" content="Calming nature sounds app for relaxation">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Calm Sounds">
+    <title>Calm Nature Sounds</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Grid View -->
+    <div id="grid-view" class="container">
+        <header>
+            <h1 id="app-title">Успокаивающие звуки природы</h1>
+            <div class="language-selector">
+                <button id="lang-button" class="lang-button">🌐</button>
+                <div id="lang-menu" class="lang-menu hidden">
+                    <div class="lang-option active" data-lang="ru">✓ Русский</div>
+                    <div class="lang-option" data-lang="he">עברית</div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="sound-grid">
+            <!-- Rain Card -->
+            <div class="sound-card rain" data-sound="rain">
+                <div class="card-content">
+                    <div class="icon">🌧️</div>
+                    <h2 class="sound-name" data-i18n="rain">Дождь</h2>
+                </div>
+            </div>
+
+            <!-- Ocean Card -->
+            <div class="sound-card ocean" data-sound="ocean">
+                <div class="card-content">
+                    <div class="icon">🌊</div>
+                    <h2 class="sound-name" data-i18n="ocean">Океан</h2>
+                </div>
+            </div>
+
+            <!-- Forest Card -->
+            <div class="sound-card forest" data-sound="forest">
+                <div class="card-content">
+                    <div class="icon">🌲</div>
+                    <h2 class="sound-name" data-i18n="forest">Лес</h2>
+                </div>
+            </div>
+
+            <!-- Wind Card -->
+            <div class="sound-card wind" data-sound="wind">
+                <div class="card-content">
+                    <div class="icon">🌬️</div>
+                    <h2 class="sound-name" data-i18n="wind">Ветер</h2>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p class="tip" data-i18n="tip">Нажмите на карточку, чтобы играть</p>
+        </footer>
+    </div>
+
+    <!-- Immersive View -->
+    <div id="immersive-view" class="immersive-container hidden">
+        <div class="immersive-header">
+            <button id="back-button" class="back-button">
+                <span class="back-arrow">←</span>
+                <span class="back-text" data-i18n="back">Назад к звукам</span>
+            </button>
+            <div class="language-selector">
+                <button id="lang-button-immersive" class="lang-button">🌐</button>
+                <div id="lang-menu-immersive" class="lang-menu hidden">
+                    <div class="lang-option active" data-lang="ru">✓ Русский</div>
+                    <div class="lang-option" data-lang="he">עברית</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="immersive-content">
+            <!-- Background will be set dynamically -->
+            <div id="immersive-bg" class="immersive-background"></div>
+            
+            <!-- Animation overlay -->
+            <div id="immersive-animation" class="animation-layer">
+                <!-- Animations added dynamically -->
+            </div>
+
+            <!-- Info display -->
+            <div class="immersive-info">
+                <h2 id="immersive-sound-name" class="immersive-sound-name">Rain</h2>
+                <p class="playing-indicator" data-i18n="playing">Играет...</p>
+            </div>
+
+            <!-- Swipe hint -->
+            <div class="swipe-hint" data-i18n="swipe-hint">← Листайте для фото/видео →</div>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="rain-audio" loop preload="auto">
+        <source src="sounds/rain.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="ocean-audio" loop preload="auto">
+        <source src="sounds/ocean.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="forest-audio" loop preload="auto">
+        <source src="sounds/forest.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wind-audio" loop preload="auto">
+        <source src="sounds/wind.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
