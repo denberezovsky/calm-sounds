@@ -2,7 +2,7 @@
   "name": "Calm Nature Sounds",
   "short_name": "Calm Sounds",
   "description": "Calming nature sounds for relaxation and focus",
-  "start_url": "/",
+  "start_url": "/calm-sounds/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#4A90A4",
