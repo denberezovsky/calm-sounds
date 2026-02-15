@@ -9,7 +9,8 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <div id="grid-view" class="container">
+    <!-- CATEGORY SELECTION SCREEN -->
+    <div id="category-view" class="container">
         <header>
             <h1 id="app-title">Звуки для детей</h1>
             <div class="language-selector">
@@ -21,50 +22,64 @@
             </div>
         </header>
         
-        <main class="sound-grid-container">
-            <section class="category-section">
-                <h2 class="category-title" data-i18n="nature">🌿 ПРИРОДА</h2>
-                <div class="sound-grid">
-                    <div class="sound-card rain" data-sound="rain"><div class="card-content"><div class="icon">🌧️</div><h3 data-i18n="rain">Дождь</h3></div></div>
-                    <div class="sound-card ocean" data-sound="ocean"><div class="card-content"><div class="icon">🌊</div><h3 data-i18n="ocean">Океан</h3></div></div>
-                    <div class="sound-card forest" data-sound="forest"><div class="card-content"><div class="icon">🌲</div><h3 data-i18n="forest">Лес</h3></div></div>
-                    <div class="sound-card wind" data-sound="wind"><div class="card-content"><div class="icon">🌬️</div><h3 data-i18n="wind">Ветер</h3></div></div>
-                    <div class="sound-card campfire" data-sound="campfire"><div class="card-content"><div class="icon">🔥</div><h3 data-i18n="campfire">Костёр</h3></div></div>
-                    <div class="sound-card waterfall" data-sound="waterfall"><div class="card-content"><div class="icon">💦</div><h3 data-i18n="waterfall">Водопад</h3></div></div>
-                </div>
-            </section>
+        <main class="category-selection">
+            <div class="category-card nature" data-category="nature">
+                <div class="category-icon">🌿</div>
+                <h2 class="category-name" data-i18n="nature">ПРИРОДА</h2>
+                <p class="category-count">6 звуков</p>
+            </div>
 
-            <section class="category-section">
-                <h2 class="category-title" data-i18n="animals">🦜 ЖИВОТНЫЕ</h2>
-                <div class="sound-grid">
-                    <div class="sound-card birds" data-sound="birds"><div class="card-content"><div class="icon">🐦</div><h3 data-i18n="birds">Птицы</h3></div></div>
-                    <div class="sound-card cat" data-sound="cat"><div class="card-content"><div class="icon">🐱</div><h3 data-i18n="cat">Кошка</h3></div></div>
-                    <div class="sound-card frogs" data-sound="frogs"><div class="card-content"><div class="icon">🐸</div><h3 data-i18n="frogs">Лягушки</h3></div></div>
-                    <div class="sound-card owl" data-sound="owl"><div class="card-content"><div class="icon">🦉</div><h3 data-i18n="owl">Сова</h3></div></div>
-                    <div class="sound-card whales" data-sound="whales"><div class="card-content"><div class="icon">🐋</div><h3 data-i18n="whales">Киты</h3></div></div>
-                    <div class="sound-card dog" data-sound="dog"><div class="card-content"><div class="icon">🐕</div><h3 data-i18n="dog">Собака</h3></div></div>
-                </div>
-            </section>
+            <div class="category-card animals" data-category="animals">
+                <div class="category-icon">🦜</div>
+                <h2 class="category-name" data-i18n="animals">ЖИВОТНЫЕ</h2>
+                <p class="category-count">6 звуков</p>
+            </div>
 
-            <section class="category-section">
-                <h2 class="category-title" data-i18n="music">🎵 МУЗЫКА</h2>
-                <div class="sound-grid">
-                    <div class="sound-card piano" data-sound="piano"><div class="card-content"><div class="icon">🎹</div><h3 data-i18n="piano">Фортепиано</h3></div></div>
-                    <div class="sound-card guitar" data-sound="guitar"><div class="card-content"><div class="icon">🎸</div><h3 data-i18n="guitar">Гитара</h3></div></div>
-                    <div class="sound-card musicbox" data-sound="musicbox"><div class="card-content"><div class="icon">🎼</div><h3 data-i18n="musicbox">Шкатулка</h3></div></div>
-                    <div class="sound-card harp" data-sound="harp"><div class="card-content"><div class="icon">🪕</div><h3 data-i18n="harp">Арфа</h3></div></div>
-                    <div class="sound-card flute" data-sound="flute"><div class="card-content"><div class="icon">🎺</div><h3 data-i18n="flute">Флейта</h3></div></div>
-                    <div class="sound-card chimes" data-sound="chimes"><div class="card-content"><div class="icon">🔔</div><h3 data-i18n="chimes">Колокольчики</h3></div></div>
-                </div>
-            </section>
+            <div class="category-card music" data-category="music">
+                <div class="category-icon">🎵</div>
+                <h2 class="category-name" data-i18n="music">МУЗЫКА</h2>
+                <p class="category-count">6 звуков</p>
+            </div>
         </main>
 
-        <footer><p class="tip" data-i18n="tip">Нажмите на карточку</p></footer>
+        <footer>
+            <p class="tip" data-i18n="tip-category">Выберите категорию</p>
+        </footer>
     </div>
 
+    <!-- SOUNDS GRID SCREEN -->
+    <div id="sounds-view" class="container hidden">
+        <header>
+            <button id="back-to-categories" class="back-button-simple">
+                <span class="back-arrow">←</span>
+                <span class="back-text" data-i18n="back">Назад</span>
+            </button>
+            <h1 id="current-category-title"></h1>
+            <div class="language-selector">
+                <button id="lang-button-sounds" class="lang-button">🌐</button>
+                <div id="lang-menu-sounds" class="lang-menu hidden">
+                    <div class="lang-option active" data-lang="ru">✓ Русский</div>
+                    <div class="lang-option" data-lang="he">עברית</div>
+                </div>
+            </div>
+        </header>
+        
+        <main class="sound-grid" id="sound-grid">
+            <!-- Sounds will be inserted here dynamically -->
+        </main>
+
+        <footer>
+            <p class="tip" data-i18n="tip">Нажмите на карточку</p>
+        </footer>
+    </div>
+
+    <!-- IMMERSIVE VIEW -->
     <div id="immersive-view" class="immersive-container hidden">
         <div class="immersive-header">
-            <button id="back-button" class="back-button"><span class="back-arrow">←</span><span class="back-text" data-i18n="back">Назад</span></button>
+            <button id="back-button" class="back-button">
+                <span class="back-arrow">←</span>
+                <span class="back-text" data-i18n="back">Назад</span>
+            </button>
             <div class="language-selector">
                 <button id="lang-button-immersive" class="lang-button">🌐</button>
                 <div id="lang-menu-immersive" class="lang-menu hidden">
@@ -82,6 +97,7 @@
         </div>
     </div>
 
+    <!-- AUDIO ELEMENTS -->
     <audio id="rain-audio" loop preload="auto"><source src="sounds/rain.mp3"></audio>
     <audio id="ocean-audio" loop preload="auto"><source src="sounds/ocean.mp3"></audio>
     <audio id="forest-audio" loop preload="auto"><source src="sounds/forest.mp3"></audio>
