@@ -1,185 +1,140 @@
-# 🌿 Звуки природы - 6 Sounds Edition
+# 🌈 Звуки для детей - Complete 18 Sounds Edition
 
-Interactive calming app with **6 nature sounds**, voice feedback, and catch games. Perfect for children with ASD.
+**Interactive calming app with 18 nature sounds, voice feedback, and catch games!**
 
-## ✨ All 6 Sounds
+## ✨ All 18 Sounds in 3 Categories:
 
-### 🌧️ Rain (Дождь / גשם)
-- Gentle rainfall sounds
-- Catch falling raindrops 💧
-- Ripple animations
+### 🌿 ПРИРОДА (Nature) - 6 sounds
+- 🌧️ Rain - Gentle rainfall
+- 🌊 Ocean - Peaceful waves
+- 🌲 Forest - Serene woodland
+- 🌬️ Wind - Calming breeze
+- 🔥 Campfire - Crackling fire
+- 💦 Waterfall - Rushing water
 
-### 🌊 Ocean (Океан / אוקיינוס)
-- Peaceful wave sounds  
-- Pop rising bubbles 🫧
-- Wave animations
+### 🦜 ЖИВОТНЫЕ (Animals) - 6 sounds  
+- 🐦 Birds - Morning songbirds
+- 🐱 Cat - Purring + soft meows
+- 🐸 Frogs - Pond croaking
+- 🦉 Owl - Gentle hooting
+- 🐋 Whales - Underwater songs
+- 🐕 Dog - Friendly barks + panting
 
-### 🌲 Forest (Лес / יער)
-- Serene woodland sounds
-- Catch falling leaves 🍃
-- Leaf animations
+### 🎵 МУЗЫКА (Music) - 6 sounds
+- 🎹 Piano - Soft melody
+- 🎸 Guitar - Gentle strumming
+- 🎼 Music Box - Lullaby
+- 🪕 Harp - Ethereal plucking
+- 🎺 Flute - Airy melody
+- 🔔 Chimes - Peaceful tinkling
 
-### 🌬️ Wind (Ветер / רוח)
-- Calming breeze sounds
-- Touch drifting clouds ☁️
-- Cloud animations
+## 🎯 Complete Features:
+- ✅ 18 interactive catch games
+- ✅ Voice feedback (Russian + Hebrew)
+- ✅ Beautiful photos for each sound
+- ✅ Smooth looping videos  
+- ✅ Bilingual (Русский / עברית)
+- ✅ PWA - installs like native app
+- ✅ Works offline
+- ✅ Custom app icon
 
-### 🔥 Campfire (Костёр / מדורה) - NEW!
-- Crackling fire sounds
-- Catch rising sparks ✨
-- Warm, cozy atmosphere
-- Perfect for evening relaxation
+## 🚀 Quick Start:
 
-### 💦 Waterfall (Водопад / מפל מים) - NEW!
-- Rushing water sounds
-- Catch fast-falling droplets 💧
-- Misty, peaceful scene
-- Energizing yet calming
+1. Upload ALL files to: github.com/denberezovsky/calm-sounds
+2. Wait 2-3 minutes for GitHub Pages
+3. Visit: denberezovsky.github.io/calm-sounds
+4. Install on tablet: "Add to Home Screen"
 
-## 🎯 Features
+## 📱 How to Use:
 
-- **Voice Feedback**: Hear sound name when tapped (Russian + Hebrew)
-- **Interactive Games**: Level 2 catch mechanics with score tracking
-- **Beautiful Media**: Photos + Videos for each sound
-- **Bilingual**: Full Russian/Hebrew support with RTL
-- **PWA Ready**: Install as app on any device
-- **Offline First**: Works completely offline
+**Main Screen:**
+- Scroll through 3 categories
+- Tap any card to hear sound name
+- Card opens immersive mode
 
-## 📱 Layout
+**Immersive Mode:**
+- Interactive game starts automatically
+- Tap to catch falling elements
+- Swipe to toggle photo/video
+- Back button returns to main screen
 
-**2x3 Grid (Desktop/Tablet):**
-```
-┌────────────────────────┐
-│ Звуки природы      🌐  │
-├───────┬────────┬───────┤
-│ Rain  │ Ocean  │Forest │
-├───────┼────────┼───────┤
-│ Wind  │Campfire│Waterfall
-└───────┴────────┴───────┘
-```
+## 🎮 Game Mechanics by Sound:
 
-**2x3 Grid (Mobile):**
-Automatically adjusts to 2 columns on small screens
+**Nature:**
+- Rain: Catch falling raindrops 💧
+- Ocean: Pop rising bubbles 🫧
+- Forest: Catch falling leaves 🍃
+- Wind: Touch drifting clouds ☁️
+- Campfire: Catch rising sparks ✨
+- Waterfall: Catch fast droplets 💧
 
-## 🎮 New Game Mechanics
+**Animals:**
+- Birds: Spot flying birds 🐦
+- Cat: Pet paw prints 🐾
+- Frogs: Catch hopping frogs 🐸
+- Owl: Spot wise owls 🦉
+- Whales: See breaching whales 🐋
+- Dog: Pet happy dog 🐾
 
-### Campfire Game 🔥
-- Sparks float **upward** from fire
-- Tap to catch twinkling sparks
-- Faster than leaves, slower than bubbles
-- Creates warm, cozy feeling
+**Music:**
+- Piano: Play musical notes 🎵
+- Guitar: Strum strings 🎸
+- Music Box: Collect sparkles ✨
+- Harp: Pluck strings 🎶
+- Flute: Catch notes 🎵
+- Chimes: Ring bells 🔔
 
-### Waterfall Game 💦
-- Droplets fall **faster** than rain
-- Represents powerful flowing water
-- More challenging catch game
-- Energizing gameplay
+## 📊 Technical Details:
 
-## 🚀 Quick Start
+- **Total Size:** ~80 MB
+- **Sounds:** 18 × ~700KB = 12.6 MB
+- **Images:** 18 × ~700KB = 12.6 MB
+- **Videos:** 18 × 1-13MB = 90 MB
+- **Voices:** 36 × ~40KB = 1.4 MB
+- **Languages:** Russian (default) + Hebrew (RTL)
 
-1. **Download** the folder
-2. **Upload to GitHub**: github.com/denberezovsky/calm-sounds
-3. **Wait 2-3 minutes** for Pages to build
-4. **Visit**: denberezovsky.github.io/calm-sounds
-5. **Install** on tablet via "Add to Home Screen"
+## 🎨 Design Philosophy:
 
-## 📊 What's New
+**ASD-Friendly:**
+- Clear, predictable interactions
+- Immediate audio/visual feedback
+- Engaging but not overwhelming
+- Calming sounds + soothing visuals
+- No ads, tracking, or surprises
 
-| Feature | Before (4 sounds) | Now (6 sounds) |
-|---------|------------------|----------------|
-| Sounds | Rain, Ocean, Forest, Wind | + Campfire, Waterfall ✅ |
-| Grid | 2x2 | 2x3 ✅ |
-| Games | 4 games | 6 games ✅ |
-| Voice files | 8 files | 12 files ✅ |
-| Total size | ~35 MB | ~58 MB ✅ |
+## 🌐 Language Support:
 
-## 📁 File Structure
+**Switch anytime with 🌐 button**
+- Русский (Russian) - default
+- עברית (Hebrew) - full RTL support
 
-```
-calm-sounds-v6/
-├── sounds/ (6 MP3s - ~4.2 MB)
-│   ├── rain.mp3
-│   ├── ocean.mp3
-│   ├── forest.mp3
-│   ├── wind.mp3
-│   ├── campfire.mp3 ⭐ NEW
-│   └── waterfall.mp3 ⭐ NEW
-├── voices/ (12 MP3s - ~450 KB)
-│   ├── voice-{sound}-ru.mp3 (6 files)
-│   └── voice-{sound}-he.mp3 (6 files)
-├── images/ (6 JPEGs - ~6 MB)
-│   └── campfire.jpeg, waterfall.jpeg ⭐ NEW
-├── videos/ (6 MP4s - ~48 MB)
-│   └── campfire.mp4, waterfall.mp4 ⭐ NEW
-└── [app files]
-```
+All UI, voice files, and translations included!
 
-**Total: ~58 MB** (still well within GitHub Pages 100GB/month limit!)
+## 🔧 Customization:
 
-## 🎨 Sound Categories
-
-**Water Sounds:** Rain, Ocean, Waterfall  
-**Nature Sounds:** Forest, Wind  
-**Fire Sound:** Campfire
-
-**Perfect variety for different moods and times of day!**
-
-## 🌐 Languages
-
-- Russian (Русский) - default
-- Hebrew (עברית) - full RTL support
-
-All UI elements translate including new sounds.
-
-## 💡 Usage Tips
-
-**Morning:** Waterfall (energizing) + Birds
-**Daytime:** Ocean, Forest  
-**Evening:** Campfire (cozy) + Wind  
-**Bedtime:** Rain (gentle) + Forest
-
-## 🔧 Customization
-
-### Game Difficulty
-
-Adjust spawn rate in `app.js`:
+**Adjust game difficulty** in app.js:
 ```javascript
-}, 2000); // 2000 = easy, 1500 = medium, 1000 = hard
+}, 2000); // 2000=easy, 1500=medium, 1000=hard
 ```
 
-### Waterfall Speed
-
-Adjust droplet speed in `app.js`:
+**Change voice volume** in app.js:
 ```javascript
-if (soundType === 'waterfall') {
-    element.speed = 2 + Math.random() * 3; // Adjust multiplier
-}
+voiceAudio.volume = 0.8; // 0.0 to 1.0
 ```
 
-## 🎯 Design Notes
+## 📝 Credits:
 
-**Campfire:**
-- Warm orange/yellow gradient
-- Sparks rise like bubbles (reversed gravity)
-- Cozy, evening vibe
-- Not scary or intense
-
-**Waterfall:**
-- Cool teal/green gradient  
-- Droplets fall faster than rain
-- Powerful but peaceful
-- Energizing atmosphere
-
-## 📝 Credits
-
-- Nature sounds: ElevenLabs AI
+- Nature/Animal/Music sounds: ElevenLabs AI
 - Voice files: ElevenLabs TTS
-- Photos/Videos: AI-generated
+- Photos: AI-generated imagery
+- Videos: AI-generated loops
 - Interactive games: Custom canvas implementation
 - Design: Optimized for ASD experience
 
 ---
 
-**Enjoy 6 beautiful nature sounds!** 🌿🔥💦
+**Made with ❤️ for calm, engaging moments**
 
-Made with ❤️ for calm, engaging moments
+Total: 18 sounds × 5 files each = 90 files!
+
+Enjoy! 🌈✨

@@ -4,19 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#4A90A4">
-    <meta name="description" content="Calming nature sounds app for relaxation">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Nature Sounds">
-    <title>Nature Sounds</title>
+    <title>Calming Sounds</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <!-- Grid View -->
     <div id="grid-view" class="container">
         <header>
-            <h1 id="app-title">Звуки природы</h1>
+            <h1 id="app-title">Звуки для детей</h1>
             <div class="language-selector">
                 <button id="lang-button" class="lang-button">🌐</button>
                 <div id="lang-menu" class="lang-menu hidden">
@@ -26,68 +21,50 @@
             </div>
         </header>
         
-        <main class="sound-grid">
-            <!-- Rain Card -->
-            <div class="sound-card rain" data-sound="rain">
-                <div class="card-content">
-                    <div class="icon">🌧️</div>
-                    <h2 class="sound-name" data-i18n="rain">Дождь</h2>
+        <main class="sound-grid-container">
+            <section class="category-section">
+                <h2 class="category-title" data-i18n="nature">🌿 ПРИРОДА</h2>
+                <div class="sound-grid">
+                    <div class="sound-card rain" data-sound="rain"><div class="card-content"><div class="icon">🌧️</div><h3 data-i18n="rain">Дождь</h3></div></div>
+                    <div class="sound-card ocean" data-sound="ocean"><div class="card-content"><div class="icon">🌊</div><h3 data-i18n="ocean">Океан</h3></div></div>
+                    <div class="sound-card forest" data-sound="forest"><div class="card-content"><div class="icon">🌲</div><h3 data-i18n="forest">Лес</h3></div></div>
+                    <div class="sound-card wind" data-sound="wind"><div class="card-content"><div class="icon">🌬️</div><h3 data-i18n="wind">Ветер</h3></div></div>
+                    <div class="sound-card campfire" data-sound="campfire"><div class="card-content"><div class="icon">🔥</div><h3 data-i18n="campfire">Костёр</h3></div></div>
+                    <div class="sound-card waterfall" data-sound="waterfall"><div class="card-content"><div class="icon">💦</div><h3 data-i18n="waterfall">Водопад</h3></div></div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Ocean Card -->
-            <div class="sound-card ocean" data-sound="ocean">
-                <div class="card-content">
-                    <div class="icon">🌊</div>
-                    <h2 class="sound-name" data-i18n="ocean">Океан</h2>
+            <section class="category-section">
+                <h2 class="category-title" data-i18n="animals">🦜 ЖИВОТНЫЕ</h2>
+                <div class="sound-grid">
+                    <div class="sound-card birds" data-sound="birds"><div class="card-content"><div class="icon">🐦</div><h3 data-i18n="birds">Птицы</h3></div></div>
+                    <div class="sound-card cat" data-sound="cat"><div class="card-content"><div class="icon">🐱</div><h3 data-i18n="cat">Кошка</h3></div></div>
+                    <div class="sound-card frogs" data-sound="frogs"><div class="card-content"><div class="icon">🐸</div><h3 data-i18n="frogs">Лягушки</h3></div></div>
+                    <div class="sound-card owl" data-sound="owl"><div class="card-content"><div class="icon">🦉</div><h3 data-i18n="owl">Сова</h3></div></div>
+                    <div class="sound-card whales" data-sound="whales"><div class="card-content"><div class="icon">🐋</div><h3 data-i18n="whales">Киты</h3></div></div>
+                    <div class="sound-card dog" data-sound="dog"><div class="card-content"><div class="icon">🐕</div><h3 data-i18n="dog">Собака</h3></div></div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Forest Card -->
-            <div class="sound-card forest" data-sound="forest">
-                <div class="card-content">
-                    <div class="icon">🌲</div>
-                    <h2 class="sound-name" data-i18n="forest">Лес</h2>
+            <section class="category-section">
+                <h2 class="category-title" data-i18n="music">🎵 МУЗЫКА</h2>
+                <div class="sound-grid">
+                    <div class="sound-card piano" data-sound="piano"><div class="card-content"><div class="icon">🎹</div><h3 data-i18n="piano">Фортепиано</h3></div></div>
+                    <div class="sound-card guitar" data-sound="guitar"><div class="card-content"><div class="icon">🎸</div><h3 data-i18n="guitar">Гитара</h3></div></div>
+                    <div class="sound-card musicbox" data-sound="musicbox"><div class="card-content"><div class="icon">🎼</div><h3 data-i18n="musicbox">Шкатулка</h3></div></div>
+                    <div class="sound-card harp" data-sound="harp"><div class="card-content"><div class="icon">🪕</div><h3 data-i18n="harp">Арфа</h3></div></div>
+                    <div class="sound-card flute" data-sound="flute"><div class="card-content"><div class="icon">🎺</div><h3 data-i18n="flute">Флейта</h3></div></div>
+                    <div class="sound-card chimes" data-sound="chimes"><div class="card-content"><div class="icon">🔔</div><h3 data-i18n="chimes">Колокольчики</h3></div></div>
                 </div>
-            </div>
-
-            <!-- Wind Card -->
-            <div class="sound-card wind" data-sound="wind">
-                <div class="card-content">
-                    <div class="icon">🌬️</div>
-                    <h2 class="sound-name" data-i18n="wind">Ветер</h2>
-                </div>
-            </div>
-
-            <!-- Campfire Card - NEW! -->
-            <div class="sound-card campfire" data-sound="campfire">
-                <div class="card-content">
-                    <div class="icon">🔥</div>
-                    <h2 class="sound-name" data-i18n="campfire">Костёр</h2>
-                </div>
-            </div>
-
-            <!-- Waterfall Card - NEW! -->
-            <div class="sound-card waterfall" data-sound="waterfall">
-                <div class="card-content">
-                    <div class="icon">💦</div>
-                    <h2 class="sound-name" data-i18n="waterfall">Водопад</h2>
-                </div>
-            </div>
+            </section>
         </main>
 
-        <footer>
-            <p class="tip" data-i18n="tip">Нажмите на карточку</p>
-        </footer>
+        <footer><p class="tip" data-i18n="tip">Нажмите на карточку</p></footer>
     </div>
 
-    <!-- Immersive View -->
     <div id="immersive-view" class="immersive-container hidden">
         <div class="immersive-header">
-            <button id="back-button" class="back-button">
-                <span class="back-arrow">←</span>
-                <span class="back-text" data-i18n="back">Назад</span>
-            </button>
+            <button id="back-button" class="back-button"><span class="back-arrow">←</span><span class="back-text" data-i18n="back">Назад</span></button>
             <div class="language-selector">
                 <button id="lang-button-immersive" class="lang-button">🌐</button>
                 <div id="lang-menu-immersive" class="lang-menu hidden">
@@ -96,39 +73,33 @@
                 </div>
             </div>
         </div>
-
         <div class="immersive-content">
             <div id="immersive-bg" class="immersive-background"></div>
             <canvas id="game-canvas" class="game-canvas"></canvas>
             <div id="immersive-animation" class="animation-layer"></div>
-            <div id="score-display" class="score-display hidden">
-                <span id="score-text"></span>
-            </div>
+            <div id="score-display" class="score-display hidden"><span id="score-text"></span></div>
             <div class="swipe-hint" data-i18n="swipe-hint">← Листайте →</div>
         </div>
     </div>
 
-    <!-- Audio elements - Nature sounds -->
-    <audio id="rain-audio" loop preload="auto"><source src="sounds/rain.mp3" type="audio/mpeg"></audio>
-    <audio id="ocean-audio" loop preload="auto"><source src="sounds/ocean.mp3" type="audio/mpeg"></audio>
-    <audio id="forest-audio" loop preload="auto"><source src="sounds/forest.mp3" type="audio/mpeg"></audio>
-    <audio id="wind-audio" loop preload="auto"><source src="sounds/wind.mp3" type="audio/mpeg"></audio>
-    <audio id="campfire-audio" loop preload="auto"><source src="sounds/campfire.mp3" type="audio/mpeg"></audio>
-    <audio id="waterfall-audio" loop preload="auto"><source src="sounds/waterfall.mp3" type="audio/mpeg"></audio>
-
-    <!-- Voice audio elements -->
-    <audio id="voice-rain-ru" preload="auto"><source src="voices/voice-rain-ru.mp3"></audio>
-    <audio id="voice-rain-he" preload="auto"><source src="voices/voice-rain-he.mp3"></audio>
-    <audio id="voice-ocean-ru" preload="auto"><source src="voices/voice-ocean-ru.mp3"></audio>
-    <audio id="voice-ocean-he" preload="auto"><source src="voices/voice-ocean-he.mp3"></audio>
-    <audio id="voice-forest-ru" preload="auto"><source src="voices/voice-forest-ru.mp3"></audio>
-    <audio id="voice-forest-he" preload="auto"><source src="voices/voice-forest-he.mp3"></audio>
-    <audio id="voice-wind-ru" preload="auto"><source src="voices/voice-wind-ru.mp3"></audio>
-    <audio id="voice-wind-he" preload="auto"><source src="voices/voice-wind-he.mp3"></audio>
-    <audio id="voice-campfire-ru" preload="auto"><source src="voices/voice-campfire-ru.mp3"></audio>
-    <audio id="voice-campfire-he" preload="auto"><source src="voices/voice-campfire-he.mp3"></audio>
-    <audio id="voice-waterfall-ru" preload="auto"><source src="voices/voice-waterfall-ru.mp3"></audio>
-    <audio id="voice-waterfall-he" preload="auto"><source src="voices/voice-waterfall-he.mp3"></audio>
+    <audio id="rain-audio" loop preload="auto"><source src="sounds/rain.mp3"></audio>
+    <audio id="ocean-audio" loop preload="auto"><source src="sounds/ocean.mp3"></audio>
+    <audio id="forest-audio" loop preload="auto"><source src="sounds/forest.mp3"></audio>
+    <audio id="wind-audio" loop preload="auto"><source src="sounds/wind.mp3"></audio>
+    <audio id="campfire-audio" loop preload="auto"><source src="sounds/campfire.mp3"></audio>
+    <audio id="waterfall-audio" loop preload="auto"><source src="sounds/waterfall.mp3"></audio>
+    <audio id="birds-audio" loop preload="auto"><source src="sounds/birds.mp3"></audio>
+    <audio id="cat-audio" loop preload="auto"><source src="sounds/cat.mp3"></audio>
+    <audio id="frogs-audio" loop preload="auto"><source src="sounds/frogs.mp3"></audio>
+    <audio id="owl-audio" loop preload="auto"><source src="sounds/owl.mp3"></audio>
+    <audio id="whales-audio" loop preload="auto"><source src="sounds/whales.mp3"></audio>
+    <audio id="dog-audio" loop preload="auto"><source src="sounds/dog.mp3"></audio>
+    <audio id="piano-audio" loop preload="auto"><source src="sounds/piano.mp3"></audio>
+    <audio id="guitar-audio" loop preload="auto"><source src="sounds/guitar.mp3"></audio>
+    <audio id="musicbox-audio" loop preload="auto"><source src="sounds/musicbox.mp3"></audio>
+    <audio id="harp-audio" loop preload="auto"><source src="sounds/harp.mp3"></audio>
+    <audio id="flute-audio" loop preload="auto"><source src="sounds/flute.mp3"></audio>
+    <audio id="chimes-audio" loop preload="auto"><source src="sounds/chimes.mp3"></audio>
 
     <script src="translations.js"></script>
     <script src="app.js"></script>

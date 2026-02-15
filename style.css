@@ -579,3 +579,46 @@ footer {
         gap: 15px;
     }
 }
+
+/* Category Sections */
+.sound-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.category-section {
+    width: 100%;
+}
+
+.category-title {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding-left: 5px;
+}
+
+/* Animal Sound Colors */
+.sound-card.birds { background: linear-gradient(135deg, #FF6B9D 0%, #C86DD7 100%); }
+.sound-card.cat { background: linear-gradient(135deg, #FFB75E 0%, #ED8F03 100%); }
+.sound-card.frogs { background: linear-gradient(135deg, #9FD356 0%, #5DB135 100%); }
+.sound-card.owl { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.sound-card.dog { background: linear-gradient(135deg, #FFD89B 0%, #B68B3A 100%); }
+
+/* Music Sound Colors */
+.sound-card.piano { background: linear-gradient(135deg, #667DB6 0%, #0082c8 100%); }
+.sound-card.guitar { background: linear-gradient(135deg, #8E54E9 0%, #4776E6 100%); }
+.sound-card.harp { background: linear-gradient(135deg, #E55D87 0%, #5FC3E4 100%); }
+.sound-card.flute { background: linear-gradient(135deg, #C2FFE5 0%, #4AC29A 100%); }
+
+/* Mobile adjustments for categories */
+@media (max-width: 480px) {
+    .category-title {
+        font-size: 1rem;
+    }
+    .sound-grid-container {
+        gap: 20px;
+    }
+}

@@ -8,7 +8,19 @@ class CalmSoundsApp {
             forest: document.getElementById('forest-audio'),
             wind: document.getElementById('wind-audio'),
             campfire: document.getElementById('campfire-audio'),
-            waterfall: document.getElementById('waterfall-audio')
+            waterfall: document.getElementById('waterfall-audio'),
+            birds: document.getElementById('birds-audio'),
+            cat: document.getElementById('cat-audio'),
+            frogs: document.getElementById('frogs-audio'),
+            owl: document.getElementById('owl-audio'),
+            whales: document.getElementById('whales-audio'),
+            dog: document.getElementById('dog-audio'),
+            piano: document.getElementById('piano-audio'),
+            guitar: document.getElementById('guitar-audio'),
+            musicbox: document.getElementById('musicbox-audio'),
+            harp: document.getElementById('harp-audio'),
+            flute: document.getElementById('flute-audio'),
+            chimes: document.getElementById('chimes-audio')
         };
         
         this.currentSound = null;
@@ -491,29 +503,27 @@ class CalmSoundsApp {
             emoji: this.getEmojiForSound(soundType)
         };
         
-        // Ocean bubbles float up
-        if (soundType === 'ocean') {
+        // Sounds that float UP
+        if (['ocean', 'campfire'].includes(soundType)) {
             element.y = this.canvas.height + 50;
             element.speed = -element.speed;
         }
         
-        // Campfire sparks float up (like bubbles)
-        if (soundType === 'campfire') {
-            element.y = this.canvas.height + 50;
-            element.speed = -(1.5 + Math.random() * 2);
-            element.twinkle = Math.random() * Math.PI * 2;
-        }
-        
-        // Wind clouds drift horizontally
-        if (soundType === 'wind') {
+        // Wind and birds drift horizontally
+        if (['wind', 'birds'].includes(soundType)) {
             element.y = Math.random() * this.canvas.height;
             element.vx = 1 + Math.random();
             element.vy = (Math.random() - 0.5) * 0.5;
         }
         
-        // Waterfall droplets fall faster
-        if (soundType === 'waterfall') {
+        // Fast fallers
+        if (['waterfall'].includes(soundType)) {
             element.speed = 2 + Math.random() * 3;
+        }
+        
+        // Slow floaters
+        if (['owl', 'harp', 'flute', 'chimes'].includes(soundType)) {
+            element.speed = 0.5 + Math.random();
         }
         
         this.gameElements.push(element);
@@ -521,12 +531,9 @@ class CalmSoundsApp {
     
     getEmojiForSound(soundType) {
         const emojis = {
-            rain: '💧',
-            ocean: '🫧',
-            forest: '🍃',
-            wind: '☁️',
-            campfire: '✨',
-            waterfall: '💧'
+            rain: '💧', ocean: '🫧', forest: '🍃', wind: '☁️', campfire: '✨', waterfall: '💧',
+            birds: '🐦', cat: '🐾', frogs: '🐸', owl: '🦉', whales: '🐋', dog: '🐾',
+            piano: '🎵', guitar: '🎸', musicbox: '✨', harp: '🎶', flute: '🎵', chimes: '🔔'
         };
         return emojis[soundType] || '⭐';
     }
