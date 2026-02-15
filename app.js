@@ -1,7 +1,7 @@
 // Calming Sounds App with Category Navigation
 class CalmSoundsApp {
     constructor() {
-        this.currentLang = localStorage.getItem('language') || 'ru';
+        this.currentLang = localStorage.getItem('language') || 'he';
         this.currentCategory = null;
         this.sounds = {};
         this.initSounds();
@@ -317,19 +317,99 @@ class CalmSoundsApp {
     }
     
     catchElement(index) {
+        const element = this.gameElements[index];
+        this.createCelebration(element.x, element.y, element.type);
         this.gameElements.splice(index, 1);
         this.score++;
         this.updateScore();
     }
     
-    updateScore() {
-        const display = document.getElementById('score-display');
-        const text = document.getElementById('score-text');
-        if (display && text) {
-            const emoji = this.getEmojiForSound(this.currentSound);
-            text.textContent = `${translations[this.currentLang].caught} ${this.score} ${emoji}`;
-            display.classList.remove('hidden');
+    createCelebration(x, y, soundType) {
+        // Determine category for celebration type
+        const natureSounds = ['rain', 'ocean', 'forest', 'wind', 'campfire', 'waterfall'];
+        const animalSounds = ['birds', 'cat', 'frogs', 'owl', 'whales', 'dog'];
+        const musicSounds = ['piano', 'guitar', 'musicbox', 'harp', 'flute', 'chimes'];
+        
+        let celebrationType;
+        if (natureSounds.includes(soundType)) {
+            celebrationType = 'stars';  // ✨ Star burst for Nature
+        } else if (animalSounds.includes(soundType)) {
+            celebrationType = 'fireworks';  // 🎆 Fireworks for Animals
+        } else if (musicSounds.includes(soundType)) {
+            celebrationType = 'confetti';  // 🎊 Confetti for Music
         }
+        
+        // Create particles based on type
+        const particleCount = 12;
+        for (let i = 0; i < particleCount; i++) {
+            const angle = (Math.PI * 2 * i) / particleCount;
+            const speed = 3 + Math.random() * 3;
+            
+            const particle = {
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1.0,
+                type: celebrationType,
+                size: 8 + Math.random() * 8,
+                color: this.getParticleColor(celebrationType, i)
+            };
+            
+            if (!this.particles) this.particles = [];
+            this.particles.push(particle);
+        }
+        
+        // Play celebration sound
+        this.playCelebrationSound(celebrationType);
+    }
+    
+    getParticleColor(type, index) {
+        if (type === 'stars') {
+            // Gold/yellow stars
+            return ['#FFD700', '#FFA500', '#FFFF00', '#FFE135'][index % 4];
+        } else if (type === 'fireworks') {
+            // Colorful fireworks
+            return ['#FF6B9D', '#C86DD7', '#667eea', '#4facfe', '#00f2fe', '#FFB75E'][index % 6];
+        } else if (type === 'confetti') {
+            // Rainbow confetti
+            return ['#FF6B9D', '#FFB75E', '#FFD700', '#4AC29A', '#667DB6', '#C86DD7'][index % 6];
+        }
+    }
+    
+    playCelebrationSound(type) {
+        // Create simple celebration sounds
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        if (type === 'stars') {
+            // Gentle "ting!"
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+        } else if (type === 'fireworks') {
+            // Fun "pop!"
+            oscillator.frequency.value = 600;
+            oscillator.type = 'square';
+        } else if (type === 'confetti') {
+            // Musical "chime!"
+            oscillator.frequency.value = 1000;
+            oscillator.type = 'triangle';
+        }
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+    }
+    
+    updateScore() {
+        // Score counter removed for better ASD experience
+        // Just visual feedback, no pressure from numbers
     }
     
     startGame(soundType) {
@@ -358,7 +438,7 @@ class CalmSoundsApp {
             type: soundType,
             x: Math.random() * this.canvas.width,
             y: -50,
-            size: 20 + Math.random() * 15,
+            size: 40 + Math.random() * 20,  // Bigger: 40-60px (was 20-35px)
             speed: 1 + Math.random() * 2,
             emoji: this.getEmojiForSound(soundType)
         };
@@ -395,6 +475,7 @@ class CalmSoundsApp {
         if (!this.gameActive) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
+        // Update and draw game elements
         for (let i = this.gameElements.length - 1; i >= 0; i--) {
             const el = this.gameElements[i];
             if (el.vx !== undefined) {
@@ -415,7 +496,68 @@ class CalmSoundsApp {
             this.ctx.fillText(el.emoji, el.x, el.y);
         }
         
+        // Update and draw celebration particles
+        if (this.particles) {
+            for (let i = this.particles.length - 1; i >= 0; i--) {
+                const p = this.particles[i];
+                
+                // Update particle position
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.2;  // Gravity
+                p.life -= 0.02;
+                
+                // Remove dead particles
+                if (p.life <= 0) {
+                    this.particles.splice(i, 1);
+                    continue;
+                }
+                
+                // Draw particle based on type
+                this.ctx.save();
+                this.ctx.globalAlpha = p.life;
+                this.ctx.fillStyle = p.color;
+                
+                if (p.type === 'stars') {
+                    // Draw star shape
+                    this.drawStar(p.x, p.y, p.size);
+                } else if (p.type === 'fireworks') {
+                    // Draw circle
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                } else if (p.type === 'confetti') {
+                    // Draw rectangle (confetti piece)
+                    this.ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size, p.size * 1.5);
+                }
+                
+                this.ctx.restore();
+            }
+        }
+        
         this.animationFrame = requestAnimationFrame(() => this.gameLoop());
+    }
+    
+    drawStar(x, y, size) {
+        const spikes = 5;
+        const outerRadius = size;
+        const innerRadius = size / 2;
+        
+        this.ctx.beginPath();
+        for (let i = 0; i < spikes * 2; i++) {
+            const radius = i % 2 === 0 ? outerRadius : innerRadius;
+            const angle = (Math.PI * i) / spikes - Math.PI / 2;
+            const px = x + Math.cos(angle) * radius;
+            const py = y + Math.sin(angle) * radius;
+            
+            if (i === 0) {
+                this.ctx.moveTo(px, py);
+            } else {
+                this.ctx.lineTo(px, py);
+            }
+        }
+        this.ctx.closePath();
+        this.ctx.fill();
     }
     
     async playSound(soundType) {
