@@ -1,8 +1,9 @@
 {
-  "name": "Calm Nature Sounds",
-  "short_name": "Calm Sounds",
-  "description": "Calming nature sounds for relaxation and focus",
+  "name": "Звуки природы",
+  "short_name": "Звуки природы",
+  "description": "Calming nature sounds for relaxation",
   "start_url": "/calm-sounds/",
+  "scope": "/calm-sounds/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#4A90A4",

@@ -114,11 +114,11 @@ body.rtl .lang-menu {
     font-weight: 600;
 }
 
-/* Sound Grid */
+/* Sound Grid - 2x3 layout for 6 sounds */
 .sound-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -214,7 +214,7 @@ footer {
     position: relative;
     padding: 20px;
     background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
-    z-index: 2001;
+    z-index: 2002;
 }
 
 .back-button {
@@ -263,6 +263,7 @@ footer {
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
 .immersive-video {
@@ -278,6 +279,50 @@ footer {
     transition: opacity 0.5s ease;
 }
 
+/* Game Canvas */
+.game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Score Display */
+.score-display {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    z-index: 2001;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: scoreAppear 0.3s ease-out;
+}
+
+.score-display.hidden {
+    display: none;
+}
+
+@keyframes scoreAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 .animation-layer {
     position: absolute;
     top: 0;
@@ -285,36 +330,7 @@ footer {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
-}
-
-.immersive-info {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    background: rgba(0,0,0,0.5);
-    padding: 30px 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-.immersive-sound-name {
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-.playing-indicator {
-    color: rgba(255,255,255,0.8);
-    font-size: 1.2rem;
-    animation: pulse-text 2s ease-in-out infinite;
-}
-
-@keyframes pulse-text {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
+    z-index: 5;
 }
 
 .swipe-hint {
@@ -324,7 +340,7 @@ footer {
     transform: translateX(-50%);
     color: rgba(255,255,255,0.6);
     font-size: 1rem;
-    z-index: 2;
+    z-index: 2001;
     animation: fade-hint 3s ease-in-out infinite;
 }
 
@@ -333,12 +349,11 @@ footer {
     50% { opacity: 1; }
 }
 
-/* Immersive Animations */
+/* Immersive Animations (existing - kept for background effects) */
 
-/* Rain Ripples */
 .ripple {
     position: absolute;
-    border: 3px solid rgba(255,255,255,0.6);
+    border: 3px solid rgba(255,255,255,0.4);
     border-radius: 50%;
     animation: ripple-animation 3s ease-out infinite;
 }
@@ -378,14 +393,13 @@ footer {
     }
 }
 
-/* Ocean Waves */
 .wave {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 30%;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
     border-radius: 50%;
     animation: wave-animation 4s ease-in-out infinite;
 }
@@ -419,11 +433,11 @@ footer {
     }
 }
 
-/* Forest Leaves */
 .leaf {
     position: absolute;
-    font-size: 3rem;
+    font-size: 2rem;
     animation: leaf-fall 5s ease-in-out infinite;
+    opacity: 0.7;
 }
 
 .leaf-1 {
@@ -458,10 +472,10 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 1;
+        opacity: 0.7;
     }
     90% {
-        opacity: 1;
+        opacity: 0.7;
     }
     100% {
         top: 110%;
@@ -470,11 +484,11 @@ footer {
     }
 }
 
-/* Wind Clouds */
 .cloud {
     position: absolute;
-    font-size: 4rem;
+    font-size: 3rem;
     animation: cloud-move 10s linear infinite;
+    opacity: 0.6;
 }
 
 .cloud-1 {
@@ -498,10 +512,10 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 0.8;
+        opacity: 0.6;
     }
     90% {
-        opacity: 0.8;
+        opacity: 0.6;
     }
     100% {
         left: 120%;
@@ -528,8 +542,9 @@ footer {
         font-size: 1.2rem;
     }
     
-    .immersive-sound-name {
-        font-size: 2rem;
+    .score-display {
+        font-size: 1.1rem;
+        padding: 12px 25px;
     }
     
     .tip {
@@ -546,4 +561,21 @@ footer {
 
 .hidden {
     display: none !important;
+}
+
+/* New sound card backgrounds */
+.sound-card.campfire {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+}
+
+.sound-card.waterfall {
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+}
+
+/* Mobile - stack vertically on small screens */
+@media (max-width: 600px) {
+    .sound-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
 }

@@ -1,26 +1,34 @@
-// Translations for Russian and Hebrew
+// Translations for Russian and Hebrew - 6 sounds
 const translations = {
     ru: {
-        title: "Успокаивающие звуки природы",
+        title: "Звуки природы",
         rain: "Дождь",
         ocean: "Океан",
         forest: "Лес",
         wind: "Ветер",
-        tip: "Нажмите на карточку, чтобы играть",
-        back: "Назад к звукам",
-        playing: "Играет...",
-        "swipe-hint": "← Листайте для фото/видео →"
+        campfire: "Костёр",
+        waterfall: "Водопад",
+        tip: "Нажмите на карточку",
+        back: "Назад",
+        "swipe-hint": "← Листайте →",
+        caught: "Поймано:",
+        popped: "Лопнуто:",
+        touched: "Поймано:"
     },
     he: {
-        title: "צלילי טבע מרגיעים",
+        title: "צלילי טבע",
         rain: "גשם",
         ocean: "אוקיינוס",
         forest: "יער",
         wind: "רוח",
-        tip: "הקש על כרטיס כדי להפעיל",
-        back: "חזרה לצלילים",
-        playing: "מנגן...",
-        "swipe-hint": "← החלק לתמונה/וידאו →"
+        campfire: "מדורה",
+        waterfall: "מפל מים",
+        tip: "הקש על כרטיס",
+        back: "חזרה",
+        "swipe-hint": "← החלק →",
+        caught: "נתפס:",
+        popped: "נפוצץ:",
+        touched: "נתפס:"
     }
 };
 
@@ -30,12 +38,16 @@ const soundNames = {
         rain: "Дождь",
         ocean: "Океан",
         forest: "Лес",
-        wind: "Ветер"
+        wind: "Ветер",
+        campfire: "Костёр",
+        waterfall: "Водопад"
     },
     he: {
         rain: "גשם",
         ocean: "אוקיינוס",
         forest: "יער",
-        wind: "רוח"
+        wind: "רוח",
+        campfire: "מדורה",
+        waterfall: "מפל מים"
     }
 };

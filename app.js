@@ -1,4 +1,4 @@
-// App State
+// Enhanced Calm Sounds App with Voice and Interactive Games
 class CalmSoundsApp {
     constructor() {
         this.currentLang = localStorage.getItem('language') || 'ru';
@@ -6,12 +6,22 @@ class CalmSoundsApp {
             rain: document.getElementById('rain-audio'),
             ocean: document.getElementById('ocean-audio'),
             forest: document.getElementById('forest-audio'),
-            wind: document.getElementById('wind-audio')
+            wind: document.getElementById('wind-audio'),
+            campfire: document.getElementById('campfire-audio'),
+            waterfall: document.getElementById('waterfall-audio')
         };
         
         this.currentSound = null;
-        this.isVideoMode = false; // false = photo, true = video
+        this.isVideoMode = false;
         this.currentVideo = null;
+        
+        // Game state
+        this.gameActive = false;
+        this.score = 0;
+        this.gameElements = [];
+        this.canvas = null;
+        this.ctx = null;
+        this.animationFrame = null;
         
         this.init();
     }
@@ -22,6 +32,7 @@ class CalmSoundsApp {
         this.setupLanguageSelector();
         this.setupBackButton();
         this.setupSwipeGesture();
+        this.setupCanvas();
         this.setupServiceWorker();
         this.setVolume(0.7);
     }
@@ -91,10 +102,6 @@ class CalmSoundsApp {
                 
                 langMenu.classList.add('hidden');
                 langMenuImmersive.classList.add('hidden');
-                
-                if (this.currentSound) {
-                    this.updateImmersiveSoundName();
-                }
             });
         });
         
@@ -104,6 +111,17 @@ class CalmSoundsApp {
         });
     }
     
+    // Voice Playback
+    playSoundVoice(soundType) {
+        const voiceId = `voice-${soundType}-${this.currentLang}`;
+        const voiceAudio = document.getElementById(voiceId);
+        
+        if (voiceAudio) {
+            voiceAudio.currentTime = 0;
+            voiceAudio.play().catch(err => console.log('Voice playback error:', err));
+        }
+    }
+    
     setupCards() {
         const cards = document.querySelectorAll('.sound-card');
         
@@ -111,7 +129,14 @@ class CalmSoundsApp {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
                 const soundType = card.dataset.sound;
-                this.openImmersiveMode(soundType);
+                
+                // Play voice
+                this.playSoundVoice(soundType);
+                
+                // Small delay before opening immersive (let voice play a bit)
+                setTimeout(() => {
+                    this.openImmersiveMode(soundType);
+                }, 300);
             });
             
             card.addEventListener('touchstart', (e) => {
@@ -123,15 +148,138 @@ class CalmSoundsApp {
                 e.preventDefault();
                 card.style.transform = '';
                 const soundType = card.dataset.sound;
-                this.openImmersiveMode(soundType);
+                
+                this.playSoundVoice(soundType);
+                
+                setTimeout(() => {
+                    this.openImmersiveMode(soundType);
+                }, 300);
             });
         });
+    }
+    
+    // Canvas Setup for Games
+    setupCanvas() {
+        this.canvas = document.getElementById('game-canvas');
+        if (!this.canvas) return;
+        
+        this.ctx = this.canvas.getContext('2d');
+        
+        // Make canvas interactive
+        this.canvas.style.pointerEvents = 'auto';
+        
+        // Touch/click handler for catching elements
+        this.canvas.addEventListener('click', (e) => this.handleGameClick(e));
+        this.canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            const touch = e.changedTouches[0];
+            const rect = this.canvas.getBoundingClientRect();
+            const clickEvent = {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            };
+            this.handleGameClick(clickEvent);
+        });
+    }
+    
+    resizeCanvas() {
+        if (!this.canvas) return;
+        this.canvas.width = this.canvas.offsetWidth;
+        this.canvas.height = this.canvas.offsetHeight;
+    }
+    
+    // Game Click Handler
+    handleGameClick(e) {
+        if (!this.gameActive) return;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Check if clicked on any game element
+        for (let i = this.gameElements.length - 1; i >= 0; i--) {
+            const element = this.gameElements[i];
+            const distance = Math.sqrt(
+                Math.pow(x - element.x, 2) + Math.pow(y - element.y, 2)
+            );
+            
+            if (distance < element.size) {
+                // Caught it!
+                this.catchElement(i);
+                break;
+            }
+        }
+    }
+    
+    catchElement(index) {
+        const element = this.gameElements[index];
+        
+        // Create catch effect
+        this.createCatchEffect(element.x, element.y);
+        
+        // Remove element
+        this.gameElements.splice(index, 1);
+        
+        // Increment score
+        this.score++;
+        this.updateScore();
+    }
+    
+    createCatchEffect(x, y) {
+        // Visual feedback - growing circle
+        const effect = {
+            x, y,
+            radius: 10,
+            opacity: 1,
+            growing: true
+        };
+        
+        const animate = () => {
+            if (effect.radius < 50) {
+                effect.radius += 3;
+                effect.opacity -= 0.05;
+                
+                this.ctx.save();
+                this.ctx.globalAlpha = effect.opacity;
+                this.ctx.strokeStyle = '#fff';
+                this.ctx.lineWidth = 3;
+                this.ctx.beginPath();
+                this.ctx.arc(effect.x, effect.y, effect.radius, 0, Math.PI * 2);
+                this.ctx.stroke();
+                this.ctx.restore();
+                
+                requestAnimationFrame(animate);
+            }
+        };
+        
+        animate();
+    }
+    
+    updateScore() {
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreText = document.getElementById('score-text');
+        
+        if (scoreDisplay && scoreText) {
+            const label = this.currentSound === 'ocean' ? 
+                translations[this.currentLang].popped : 
+                translations[this.currentLang].caught;
+            
+            const emoji = {
+                rain: '💧',
+                ocean: '🫧',
+                forest: '🍃',
+                wind: '☁️'
+            }[this.currentSound] || '';
+            
+            scoreText.textContent = `${label} ${this.score} ${emoji}`;
+            scoreDisplay.classList.remove('hidden');
+        }
     }
     
     // Immersive Mode
     openImmersiveMode(soundType) {
         this.currentSound = soundType;
-        this.isVideoMode = false; // Start with photo
+        this.isVideoMode = false;
         
         const gridView = document.getElementById('grid-view');
         const immersiveView = document.getElementById('immersive-view');
@@ -140,9 +288,12 @@ class CalmSoundsApp {
         immersiveView.classList.remove('hidden');
         
         this.playSound(soundType);
-        this.setImmersiveBackground(soundType, false); // Start with photo
+        this.setImmersiveBackground(soundType, false);
         this.setImmersiveAnimations(soundType);
-        this.updateImmersiveSoundName();
+        
+        // Start interactive game
+        this.resizeCanvas();
+        this.startGame(soundType);
     }
     
     closeImmersiveMode() {
@@ -153,12 +304,14 @@ class CalmSoundsApp {
             this.stopSound(this.currentSound);
         }
         
-        // Stop and clean up video if playing
         if (this.currentVideo) {
             this.currentVideo.pause();
             this.currentVideo.remove();
             this.currentVideo = null;
         }
+        
+        // Stop game
+        this.stopGame();
         
         immersiveView.classList.add('hidden');
         gridView.classList.remove('hidden');
@@ -167,22 +320,13 @@ class CalmSoundsApp {
         this.isVideoMode = false;
     }
     
-    updateImmersiveSoundName() {
-        const nameEl = document.getElementById('immersive-sound-name');
-        if (nameEl && this.currentSound) {
-            nameEl.textContent = soundNames[this.currentLang][this.currentSound];
-        }
-    }
-    
     setImmersiveBackground(soundType, isVideo) {
         const bg = document.getElementById('immersive-bg');
         
-        // Clear existing content
         bg.innerHTML = '';
         bg.style.backgroundImage = '';
         
         if (isVideo) {
-            // Create and play video
             const video = document.createElement('video');
             video.className = 'immersive-video';
             video.src = `videos/${soundType}.mp4`;
@@ -194,7 +338,6 @@ class CalmSoundsApp {
             bg.appendChild(video);
             this.currentVideo = video;
             
-            // Fade in video
             video.style.opacity = '0';
             video.addEventListener('loadeddata', () => {
                 setTimeout(() => {
@@ -202,14 +345,12 @@ class CalmSoundsApp {
                 }, 100);
             });
         } else {
-            // Stop video if it exists
             if (this.currentVideo) {
                 this.currentVideo.pause();
                 this.currentVideo.remove();
                 this.currentVideo = null;
             }
             
-            // Set photo background
             bg.style.backgroundImage = `url('images/${soundType}.jpeg')`;
         }
     }
@@ -218,6 +359,7 @@ class CalmSoundsApp {
         const animLayer = document.getElementById('immersive-animation');
         animLayer.innerHTML = '';
         
+        // Keep subtle background animations
         if (soundType === 'rain') {
             for (let i = 1; i <= 3; i++) {
                 const ripple = document.createElement('div');
@@ -273,10 +415,8 @@ class CalmSoundsApp {
             const diff = touchStartX - touchEndX;
             
             if (Math.abs(diff) > swipeThreshold && this.currentSound) {
-                // Toggle between photo and video
                 this.isVideoMode = !this.isVideoMode;
                 
-                // Update background with smooth transition
                 const bg = document.getElementById('immersive-bg');
                 bg.style.opacity = '0';
                 
@@ -290,6 +430,140 @@ class CalmSoundsApp {
         };
         
         this.handleSwipe = handleSwipe;
+    }
+    
+    // Interactive Games
+    startGame(soundType) {
+        this.gameActive = true;
+        this.score = 0;
+        this.gameElements = [];
+        
+        const scoreDisplay = document.getElementById('score-display');
+        if (scoreDisplay) {
+            scoreDisplay.classList.remove('hidden');
+        }
+        
+        this.updateScore();
+        
+        // Start game loop
+        this.gameLoop();
+        
+        // Spawn elements periodically
+        this.spawnInterval = setInterval(() => {
+            this.spawnGameElement(soundType);
+        }, 2000); // Spawn every 2 seconds
+    }
+    
+    stopGame() {
+        this.gameActive = false;
+        
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+        }
+        
+        if (this.spawnInterval) {
+            clearInterval(this.spawnInterval);
+        }
+        
+        this.gameElements = [];
+        this.score = 0;
+        
+        const scoreDisplay = document.getElementById('score-display');
+        if (scoreDisplay) {
+            scoreDisplay.classList.add('hidden');
+        }
+        
+        // Clear canvas
+        if (this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+    
+    spawnGameElement(soundType) {
+        if (!this.gameActive || !this.canvas) return;
+        
+        const element = {
+            type: soundType,
+            x: Math.random() * this.canvas.width,
+            y: -50,
+            size: 20 + Math.random() * 15,
+            speed: 1 + Math.random() * 2,
+            emoji: this.getEmojiForSound(soundType)
+        };
+        
+        // Ocean bubbles float up
+        if (soundType === 'ocean') {
+            element.y = this.canvas.height + 50;
+            element.speed = -element.speed;
+        }
+        
+        // Campfire sparks float up (like bubbles)
+        if (soundType === 'campfire') {
+            element.y = this.canvas.height + 50;
+            element.speed = -(1.5 + Math.random() * 2);
+            element.twinkle = Math.random() * Math.PI * 2;
+        }
+        
+        // Wind clouds drift horizontally
+        if (soundType === 'wind') {
+            element.y = Math.random() * this.canvas.height;
+            element.vx = 1 + Math.random();
+            element.vy = (Math.random() - 0.5) * 0.5;
+        }
+        
+        // Waterfall droplets fall faster
+        if (soundType === 'waterfall') {
+            element.speed = 2 + Math.random() * 3;
+        }
+        
+        this.gameElements.push(element);
+    }
+    
+    getEmojiForSound(soundType) {
+        const emojis = {
+            rain: '💧',
+            ocean: '🫧',
+            forest: '🍃',
+            wind: '☁️',
+            campfire: '✨',
+            waterfall: '💧'
+        };
+        return emojis[soundType] || '⭐';
+    }
+    
+    gameLoop() {
+        if (!this.gameActive) return;
+        
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Update and draw elements
+        for (let i = this.gameElements.length - 1; i >= 0; i--) {
+            const element = this.gameElements[i];
+            
+            // Update position
+            if (element.type === 'wind') {
+                element.x += element.vx;
+                element.y += element.vy;
+            } else {
+                element.y += element.speed;
+            }
+            
+            // Remove if off screen
+            if (element.y > this.canvas.height + 50 || 
+                element.y < -50 || 
+                element.x > this.canvas.width + 50) {
+                this.gameElements.splice(i, 1);
+                continue;
+            }
+            
+            // Draw element
+            this.ctx.font = `${element.size}px Arial`;
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.fillText(element.emoji, element.x, element.y);
+        }
+        
+        this.animationFrame = requestAnimationFrame(() => this.gameLoop());
     }
     
     // Sound Controls
